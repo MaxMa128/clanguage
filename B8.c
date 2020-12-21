@@ -2,7 +2,7 @@
 int change(int n) 
 {
 	int a,b=1,c=0;
-    for (a=0;a<32;a++)
+    for (a=0;a<64;a++)
 	{
         if(n==0)
 		{

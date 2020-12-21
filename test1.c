@@ -1,30 +1,22 @@
-#include<stdio.h>
- 
-int main() {
-	char str[30];
-	gets(str);
-	int len = 0, length = 0, flag = 1, place = 0, point;
-	int i;
-	for (i = 0; str[i] != '\0'; i++) {
-		if ((str[i] >= 'a' && str[i] <= 'z')
-				|| (str[i] >= 'A' && str[i] <= 'Z')) {
-			if (flag == 1) {
-				point = i;
-				flag = 0;
-			} else
-				len++;
- 
-		} else {
-			flag = 1;
-			if (len >= length) {
-				length = len;
-				place = point;
-				len = 0;
-			}
-		}
-	}
-	for (i = place; i <=( place + length); i++)
-		printf("%c", str[i]);
-	return 0;
+int main()
+{
+         char c;
+         int fd[2], fd2[2];
+         pipe(fd);
+         pipe(fd2);
+         if (fork() == 0)
+         {
+                    write(fd[1], &c, 1);
+                    putchar('b');
+                    read(fd2[0], &c, 1);
+                    putchar('d');
+                    exit(0);
+          }
+          putchar('a');
+          read(fd[0], &c, 1);
+          putchar('c');
+          write(fd2[1], &c, 1);
+          wait(NULL);
+          putchar('f');
+          return 0;
 }
-
